@@ -19,18 +19,23 @@ with open("info/"+f_name, "w", encoding="utf-8-sig",newline="") as u:
         h_element=i.find("h3")
         a_cont=h_element.find("a")
         price_tag=i.find("p",class_="price_color") #the tag and the class tag for prices
-        rating=i.find("p",class_="star-rating")    
+        rating=i.find("p",class_="star-rating")["class"]
+        print(rating[1])
+        rating = rating[1]
+        if (rating=="five"):
+            rating=5
+        elif (rating=="four"):
+            rating=4
+        elif (rating=="three"):
+            rating=3
+        elif (rating=="one"):
+            rating=1
+            
+            
         list_cont=[] #add to the list
         list_cont.append(a_cont.string) #we string so as to not include both the tag and title
         list_cont.append(price_tag.string) #string so as to not include both tag and price
-        list_cont.append(rating.string)
-        if (rating=="five"):
-            print("five stars")
-        elif (rating=="four"):
-            print("four stars")
-        elif (rating=="two"):
-            print("two stars")
-        elif (rating=="one"):
-            print("one star")
+        list_cont.append(rating)
+        """list_cont.append(rating.string)"""
 
         v.writerow(list_cont)
